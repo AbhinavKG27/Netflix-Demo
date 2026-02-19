@@ -1,12 +1,34 @@
-// Update this page (the content is just a fallback if you fail to update the page)
+import NetflixNavbar from "@/components/NetflixNavbar";
+import HeroBanner from "@/components/HeroBanner";
+import MovieRow from "@/components/MovieRow";
+import NetflixFooter from "@/components/NetflixFooter";
+import {
+  trendingNow,
+  topPicksForYou,
+  continueWatching,
+  newReleases,
+  actionThriller,
+  allMovies,
+} from "@/data/movies";
 
 const Index = () => {
   return (
-    <div className="flex min-h-screen items-center justify-center bg-background">
-      <div className="text-center">
-        <h1 className="mb-4 text-4xl font-bold">Welcome to Your Blank App</h1>
-        <p className="text-xl text-muted-foreground">Start building your amazing project here!</p>
+    <div className="min-h-screen bg-background text-foreground">
+      <NetflixNavbar />
+      <HeroBanner />
+
+      {/* Content rows */}
+      <div className="-mt-16 relative z-10">
+        <MovieRow title="Trending Now" movies={trendingNow} />
+        <MovieRow title="Top 10 in Your Country Today" movies={allMovies.slice(0, 6)} showRank />
+        <MovieRow title="Continue Watching for You" movies={continueWatching} />
+        <MovieRow title="New Releases" movies={newReleases} />
+        <MovieRow title="Top Picks For You" movies={topPicksForYou} />
+        <MovieRow title="Action & Thriller" movies={actionThriller} />
+        <MovieRow title="Watch It Again" movies={[...allMovies].reverse().slice(0, 6)} />
       </div>
+
+      <NetflixFooter />
     </div>
   );
 };
