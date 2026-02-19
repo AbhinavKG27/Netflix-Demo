@@ -57,6 +57,12 @@ export default {
           border: "hsl(var(--sidebar-border))",
           ring: "hsl(var(--sidebar-ring))",
         },
+        netflix: {
+          red: "hsl(var(--netflix-red))",
+          black: "hsl(var(--netflix-black))",
+          dark: "hsl(var(--netflix-dark))",
+          gray: "hsl(var(--netflix-gray))",
+        },
       },
       borderRadius: {
         lg: "var(--radius)",
