@@ -1,4 +1,5 @@
 import type { Config } from "tailwindcss";
+/* Ladle */
 
 export default {
   darkMode: ["class"],
