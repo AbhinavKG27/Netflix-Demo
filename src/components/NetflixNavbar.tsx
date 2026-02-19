@@ -1,11 +1,14 @@
 import { useState, useEffect } from "react";
-import { Search, Bell, ChevronDown, Menu, X } from "lucide-react";
+import { Search, Bell, ChevronDown, X } from "lucide-react";
+import { Link } from "react-router-dom";
+import { useAuth } from "@/contexts/AuthContext";
 
 const NetflixNavbar = () => {
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
+  const { user, signOut } = useAuth();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -83,28 +86,37 @@ const NetflixNavbar = () => {
             <span className="absolute -top-1 -right-1 w-2 h-2 bg-[hsl(var(--netflix-red))] rounded-full" />
           </button>
 
-          {/* Profile */}
-          <div className="flex items-center gap-1 cursor-pointer group">
-            <div className="w-8 h-8 rounded bg-[hsl(var(--netflix-red))] flex items-center justify-center text-xs font-bold">N</div>
-            <ChevronDown className="w-4 h-4 text-foreground transition-transform group-hover:rotate-180 duration-200" />
-            {/* Dropdown */}
-            <div className="absolute top-14 right-4 md:right-12 hidden group-hover:block bg-black/95 border border-foreground/10 py-2 min-w-[200px] shadow-2xl z-50">
-              <div className="flex items-center gap-3 px-4 py-2 hover:bg-white/5 cursor-pointer">
-                <div className="w-8 h-8 rounded bg-blue-600 flex items-center justify-center text-xs font-bold">U</div>
-                <span className="text-sm">User 1</span>
+          {/* Profile / Auth */}
+          {user ? (
+            <div className="flex items-center gap-1 cursor-pointer group relative">
+              <div className="w-8 h-8 rounded bg-[hsl(var(--netflix-red))] flex items-center justify-center text-xs font-bold uppercase">
+                {user.email?.[0] ?? "N"}
               </div>
-              <div className="flex items-center gap-3 px-4 py-2 hover:bg-white/5 cursor-pointer">
-                <div className="w-8 h-8 rounded bg-green-600 flex items-center justify-center text-xs font-bold">K</div>
-                <span className="text-sm">Kids</span>
+              <ChevronDown className="w-4 h-4 text-foreground transition-transform group-hover:rotate-180 duration-200" />
+              {/* Dropdown */}
+              <div className="absolute top-10 right-0 hidden group-hover:block bg-black/95 border border-foreground/10 py-2 min-w-[200px] shadow-2xl z-50">
+                <div className="px-4 py-2 text-xs text-foreground/50 truncate">{user.email}</div>
+                <div className="border-t border-foreground/10 my-1" />
+                <div className="px-4 py-2 hover:bg-white/5 cursor-pointer text-sm text-foreground/70 hover:text-foreground">Manage Profiles</div>
+                <div className="px-4 py-2 hover:bg-white/5 cursor-pointer text-sm text-foreground/70 hover:text-foreground">Account</div>
+                <div className="px-4 py-2 hover:bg-white/5 cursor-pointer text-sm text-foreground/70 hover:text-foreground">Help Center</div>
+                <div className="border-t border-foreground/10 my-1" />
+                <button
+                  onClick={signOut}
+                  className="w-full text-left px-4 py-2 hover:bg-white/5 cursor-pointer text-sm text-foreground/70 hover:text-foreground"
+                >
+                  Sign out of Netflix
+                </button>
               </div>
-              <div className="border-t border-foreground/10 my-1" />
-              <div className="px-4 py-2 hover:bg-white/5 cursor-pointer text-sm text-foreground/70 hover:text-foreground">Manage Profiles</div>
-              <div className="px-4 py-2 hover:bg-white/5 cursor-pointer text-sm text-foreground/70 hover:text-foreground">Account</div>
-              <div className="px-4 py-2 hover:bg-white/5 cursor-pointer text-sm text-foreground/70 hover:text-foreground">Help Center</div>
-              <div className="border-t border-foreground/10 my-1" />
-              <div className="px-4 py-2 hover:bg-white/5 cursor-pointer text-sm text-foreground/70 hover:text-foreground">Sign out of Netflix</div>
             </div>
-          </div>
+          ) : (
+            <Link
+              to="/login"
+              className="bg-[hsl(var(--netflix-red))] hover:bg-[hsl(var(--netflix-red)/0.85)] text-foreground text-sm font-semibold px-4 py-2 rounded transition-colors"
+            >
+              Sign In
+            </Link>
+          )}
         </div>
       </div>
 
