@@ -49,7 +49,8 @@ export async function getMovieDetails(imdbID: string): Promise<MovieDetails> {
   return data;
 }
 
-export const FALLBACK_POSTER = "https://via.placeholder.com/300x450/1a1a1a/666?text=No+Poster";
+export const FALLBACK_POSTER =
+  "https://placehold.co/300x450?text=No+Poster";
 
 export const CATEGORIES = [
   { title: "Trending Now", query: "avengers" },
