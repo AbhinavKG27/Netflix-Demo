@@ -87,8 +87,8 @@ The app will be available at `http://localhost:5173`.
 
 > ⚠️ **Deployment link coming soon.**
 
-<!-- Add your deployed URL below once available -->
-<!-- **Live Demo:** [https://your-deployment-url.com](https://your-deployment-url.com) -->
+
+**Live Demo:** [https://demo-project-net-flix.netlify.app/](https://demo-project-net-flix.netlify.app/) 
 
 ### Deploy to Vercel
 
